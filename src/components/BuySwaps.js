@@ -13,6 +13,8 @@ const BuySwaps = ({ poolAddress }) => {
         setUserBalance,
         kUSDContract,
         poolContract,
+        iTokenContract,
+        setITokenStorage,
     } = useContext(TezosStuffContext);
 
     const [paymentTokenAmount, setPaymentTokenAmount] = useState("");
@@ -50,8 +52,12 @@ const BuySwaps = ({ poolAddress }) => {
             const batchOp = await batch.send();
             console.log("Operation hash:", batchOp.hash);
             await batchOp.confirmation();
-            const newStorage = await poolContract.storage();
-            if (newStorage) setPoolStorage(newStorage);
+            const newPoolStorage = await poolContract.storage();
+            if (newPoolStorage) setPoolStorage(newPoolStorage);
+            const newKUSDStorage = await kUSDContract.storage();
+            if (newKUSDStorage) setKUSDStorage(newKUSDStorage);
+            const newITokenStorage = await iTokenContract.storage();
+            if (newITokenStorage) setITokenStorage(newITokenStorage);
 
             setUserBalance(await Tezos.tz.getBalance(userAddress));
         } catch (error) {

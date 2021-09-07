@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-const Table = ({ rows, header, headerLength, name }) => {
+const Table = ({ rows, header, headerLength, name, callback }) => {
     const renderTableData = () => {
         return rows.map((row, index) => {
             var rowArray = [];
@@ -17,6 +17,7 @@ const Table = ({ rows, header, headerLength, name }) => {
                             className="submitButton"
                             type="submit"
                             value="Claim"
+                            onClick = {callback}
                         />
                     </td>
                 );
