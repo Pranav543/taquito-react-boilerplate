@@ -5,7 +5,7 @@ import DisconnectButton from "./../components/DisconnectWallet";
 import { TezosStuffContext } from "../App";
 
 import SuperExchange_Logo from "../assets/SuperExchange_Logo_Circle.gif";
-import "../App.css";
+import "../App.scss";
 
 const Navigation = ({
     poolAddress,

@@ -31,6 +31,8 @@ const ConnectButton = ({
         setKUSDStorage,
         setBeaconConnection,
         setPublicToken,
+        setUserITokenBalance,
+        setUserOTokenBalance
     } = useContext(TezosStuffContext);
 
     const setup = async (userAddress) => {
@@ -39,10 +41,10 @@ const ConnectButton = ({
         const balance = await Tezos.tz.getBalance(userAddress);
         setUserBalance(balance.toNumber());
 
-        const contract = await Tezos.wallet.at(contractAddress);
-        const storage = await contract.storage();
-        console.log("contract: ", contract);
-        console.log("storage: ", storage);
+        // const contract = await Tezos.wallet.at(contractAddress);
+        // const storage = await contract.storage();
+        // console.log("contract: ", contract);
+        // console.log("storage: ", storage);
 
         // creates poolContract instance
         const poolContract = await Tezos.wallet.at(poolAddress);
@@ -64,10 +66,19 @@ const ConnectButton = ({
         const kUSDContractStorage = await kUSDContract.storage();
         setKUSDContract(kUSDContract);
         setKUSDStorage(kUSDContractStorage);
-        console.log("poolContract: ", poolContract);
+        // console.log("poolContract: ", poolContract);
         console.log("poolContractStorage: ", poolContractStorage);
         console.log("iTokenContract: ", iTokenContract);
         console.log("iTokenContractStorage: ", iTokenContractStorage);
+        const balance_map = await iTokenContractStorage.balances.get(userAddress);
+            const userITokenAmount = balance_map.balance.toNumber();
+            setUserITokenBalance(userITokenAmount)
+        
+            console.log("userITokenAmount: ", userITokenAmount)
+            const balance_map2 = await oTokenContractStorage.balances.get(userAddress);
+            const userOTokenAmount = balance_map2.balance.toNumber();
+            setUserOTokenBalance(userOTokenAmount)
+            console.log("userOTokenAmount: ", userOTokenAmount)
     };
 
     const connectWallet = async () => {

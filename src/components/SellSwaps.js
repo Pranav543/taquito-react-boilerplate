@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { OpKind } from "@taquito/taquito";
 import { TezosStuffContext } from "../App";
 
-import "../App.css";
+import "../App.scss";
 
 const SellSwaps = ({ poolAddress }) => {
     const {
@@ -92,10 +92,25 @@ const SellSwaps = ({ poolAddress }) => {
                 }}
             />
 
-            <h2 className="sectionTitle">
+            <h2 className="extraInfo">
                 You Will Receive : {paymentTokenAmount} OToken
             </h2>
-            <input className="submitButton" type="submit" value="Trade" />
+            <button
+                className="button"
+                disabled={loading}
+                onClick={handleSubmit}
+            >
+                {loading ? (
+                    <span style={{fontWeight: 'bold'}} >
+                        <i className="fas fa-spinner fa-spin"></i>&nbsp; Please
+                        wait
+                    </span>
+                ) : (
+                    <span style={{fontWeight: 'bold'}} >
+                        Trade
+                    </span>
+                )}
+            </button>
         </form>
     );
 };

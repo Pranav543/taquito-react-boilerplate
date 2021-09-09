@@ -4,12 +4,12 @@ import { Tab, Tabs } from "react-bootstrap";
 import BuySwaps from "./BuySwaps";
 import SellSwaps from "./SellSwaps";
 
-import "../App.css";
+import "../App.scss";
 
 const TradeForm = ({ poolAddress }) => {
     return (
         <div className="leftComponent userInput">
-            <h1 className="sectionTitle"> Pool Name </h1>
+            <h1 className="sectionTitle"> Pool Name- AAVE Protocol </h1>
             <Tabs
                 defaultActiveKey="trader"
                 transition={false}

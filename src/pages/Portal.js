@@ -2,10 +2,10 @@ import React from "react";
 
 import TradeForm from "../components/TradeForm";
 import TraderDashboard from "../components/TraderDashboard";
-import LProviders from "../components/LProviders";
+import OtherPools from "../components/OtherPools";
 import PoolDetails from "../components/PoolDetails";
 
-import "../App.css";
+import "../App.scss";
 
 const Portal = ({ poolAddress }) => {
     return (
@@ -17,7 +17,7 @@ const Portal = ({ poolAddress }) => {
             <br />
             <div className="rowComp">
                 <TraderDashboard />
-                {/* <LProviders /> */}
+                <OtherPools />
             </div>
         </div>
     );

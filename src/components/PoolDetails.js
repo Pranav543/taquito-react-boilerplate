@@ -15,17 +15,17 @@ const PoolDetails = () => {
     let rows = [
         {
             id: 1,
-            Expiry: "IN",
+            Expiry: "10 Sept 21",
             Default: "No",
-            IToken: iTokenPoolSize,
-            OToken: oTokenPoolSize,
+            CoverPoolSize: iTokenPoolSize,
+            PremiumPoolSize: oTokenPoolSize,
         },
     ];
-    let headers = ["id", "Expiry", "Default", "IToken", "OToken"];
+    let headers = ["id", "Expiry", "Default", "CoverPoolSize", "PremiumPoolSize"];
 
     return (
         <div className="rightComponent lPool">
-            <h1 className="sectionTitle"> Pool Details</h1>
+            <h1 className="sectionTitle"> Current Pool Details</h1>
             <Table
                 name="PoolDetails"
                 rows={rows}

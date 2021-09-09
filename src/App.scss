@@ -1,16 +1,21 @@
 html,
 body {
   margin: 0;
-  padding: 0;
+  min-height: 90vh;
+  place-items: center;
   background-color: #f2edd7;
+  transform-style: preserve-3d;
+  overflow: hidden;
+
 }
 
 .header {
-  background-color: #eae2b6;
+  background-color: #f2edd7;
   padding: 2px;
   height: 70px;
   display: flex;
   flex-direction: row;
+  background-size: cover;
 }
 
 .logo {
@@ -29,7 +34,8 @@ body {
 .appLine {
   font-family: courier new;
   color: #5d534a;
-  margin-top: 1%;
+  margin-top: 19%;
+  font-size: 50px;
 }
 
 .homeNavigationBar {
@@ -44,16 +50,16 @@ body {
   list-style: none;
 }
 
-.homeNavigationBar ul > li {
+.homeNavigationBar ul>li {
   padding-right: 35%;
 }
 
-.homeNavigationBar ul > li > a {
+.homeNavigationBar ul>li>a {
   color: rgba(93, 83, 74, 0.85);
   text-decoration: none;
 }
 
-.homeNavigationBar ul > li > a:hover {
+.homeNavigationBar ul>li>a:hover {
   font-weight: bold;
   /* color: rgba(121, 82, 179, 1); */
 }
@@ -97,6 +103,7 @@ body {
   color: #5d534a;
 }
 
+
 .nav-tabs {
   display: flex;
   margin-right: 20%;
@@ -133,6 +140,75 @@ body {
   margin-left: 12%;
 }
 
+textarea:focus, input:focus{
+  outline: none;
+}
+
+.extraInfo {
+  color: #5d534a;
+  display: flex;
+  margin-right: auto;
+  margin-left: 17%;
+  
+  font-size: 20px;
+}
+
+
+
+.button {
+  margin-top: 2%;
+  font-family: courier new;
+  margin-bottom: 5px;
+  color: #35636e;
+  font-size: 1.3rem;
+  padding: 15px;
+  width: 180px;
+  // height: 56px;
+  background-color: white;
+  border-radius: 3px;
+  border: solid 2px #35636e;
+  outline: none;
+  cursor: pointer;
+  transition: 0.2s;
+  background: none;
+  // display: flex;
+  margin-right: auto;
+  margin-left: 25%;
+}
+.button:hover {
+  color: white;
+  background-color: rgba(121, 82, 179, 0.8);
+}
+.button:active {
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+.claimbutton {
+  font-family: courier new;
+  margin-top: 2%;
+  margin-bottom: 5px;
+  color: #35636e;
+  font-size: 1rem;
+  padding: 15px;
+  background-color: white;
+  border-radius: 3px;
+  border: solid 2px #35636e;
+  outline: none;
+  cursor: pointer;
+  transition: 0.2s;
+  background: none;
+  
+}
+.claimbutton:hover {
+  color: white;
+  background-color: rgba(121, 82, 179, 0.8);
+}
+.claimbutton:active {
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
 .submitButton {
   font-family: courier new;
   margin-top: 3%;
@@ -154,7 +230,7 @@ body {
   font-size: 25px;
   background-color: rgba(121, 82, 179, 0.8);
   color: #e3cdc1;
-  
+
 }
 
 .submitButton:hover {
@@ -166,6 +242,7 @@ body {
   /* background-color: #a239ea; */
   background-color: rgba(121, 82, 179, 1);
 }
+
 
 #table {
   text-align: center;

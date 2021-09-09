@@ -3,7 +3,7 @@ import { TezosToolkit } from "@taquito/taquito";
 import Navigation from "./pages/Navigation";
 import Main from "./pages/Main";
 
-import "./App.css";
+import "./App.scss";
 
 export const TezosStuffContext = React.createContext("tezosStuff");
 
@@ -14,6 +14,8 @@ const App = () => {
     const [wallet, setWallet] = useState(null);
     const [userAddress, setUserAddress] = useState("");
     const [userBalance, setUserBalance] = useState(0);
+    const [userITokenBalance, setUserITokenBalance] = useState(0);
+    const [userOTokenBalance, setUserOTokenBalance] = useState(0);
     const [poolContract, setPoolContract] = useState(undefined);
     const [poolStorage, setPoolStorage] = useState(0);
     const [iTokenContract, setITokenContract] = useState(undefined);
@@ -30,6 +32,11 @@ const App = () => {
     const kUSDAddress = "KT1ACn9ksAgs3sP4rnwCeMN2trDPYFxKq4gg";
     const poolAddress = "KT1DUiy8DckvTngcftUsySXn6X5ipYns5Jsh";
     const contractAddress = "KT1K3XVNzsmur7VRgY8CAHPUENaErzzEpe4e";
+
+    // const iTokenAddress = "KT1AfnV1XJJ1VnSdxaAMiHXGV6vQduKoYMBt";
+    // const oTokenAddress = "KT1UXwQAFeGNt6vo6i8x5eoLqG6dtpVq5qYr";
+    // const kUSDAddress = "KT1ACn9ksAgs3sP4rnwCeMN2trDPYFxKq4gg";
+    // const poolAddress = "KT1DQRvcdq7sF4cDVkiAcGfXCN2L25c6DfuV";
 
     return (
         <div className="app">
@@ -63,6 +70,10 @@ const App = () => {
                     setBeaconConnection,
                     publicToken,
                     setPublicToken,
+                    userITokenBalance,
+                    setUserITokenBalance,
+                    userOTokenBalance,
+                    setUserOTokenBalance,
                 }}
             >
                 <Navigation

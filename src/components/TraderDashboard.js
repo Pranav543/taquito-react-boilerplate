@@ -18,6 +18,8 @@ const TraderDashboard = () => {
         oTokenStorage,
         setOTokenStorage,
         setITokenStorage,
+        userITokenBalance,
+        userOTokenBalance,
     } = useContext(TezosStuffContext);
 
     const [isDefault, setDefault] = useState(true);
@@ -27,9 +29,9 @@ const TraderDashboard = () => {
         {
             id: 1,
             pool: "AAVE Protocol",
-            Default: isDefault,
-            IToken: 0,
-            OToken: 0,
+            Default: isDefault ? "Yes" : "No",
+            IToken: userITokenBalance,
+            OToken: userOTokenBalance,
         },
     ];
 
@@ -90,8 +92,8 @@ const TraderDashboard = () => {
         try {
             const batch = await Tezos.wallet.batch(batchT);
             const batchOp = await batch.send();
-            console.log("Operation hash:", batchOp.hash);
             await batchOp.confirmation();
+            console.log("Operation hash:", batchOp.hash);
             const newStorage = await poolContract.storage();
             if (newStorage) setPoolStorage(newStorage);
             const newKUSDStorage = await kUSDContract.storage();
@@ -121,13 +123,14 @@ const TraderDashboard = () => {
 
     return (
         <div className="leftComponent traders">
-            <h1 className="sectionTitle"> Traders </h1>
+            <h1 className="sectionTitle"> Your Dashboard </h1>
             <Table
                 name="tradersDashboard"
                 rows={rows}
                 header={headers}
                 callback={callback}
                 headerLength={headers.length}
+                loading={loading}
             />
         </div>
     );
