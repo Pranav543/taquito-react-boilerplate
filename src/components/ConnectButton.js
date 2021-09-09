@@ -32,7 +32,7 @@ const ConnectButton = ({
         setBeaconConnection,
         setPublicToken,
         setUserITokenBalance,
-        setUserOTokenBalance
+        setUserOTokenBalance,
     } = useContext(TezosStuffContext);
 
     const setup = async (userAddress) => {
@@ -70,15 +70,22 @@ const ConnectButton = ({
         console.log("poolContractStorage: ", poolContractStorage);
         console.log("iTokenContract: ", iTokenContract);
         console.log("iTokenContractStorage: ", iTokenContractStorage);
-        const balance_map = await iTokenContractStorage.balances.get(userAddress);
+        try{
+            const balance_map = await iTokenContractStorage.balances.get(
+                userAddress
+            );
             const userITokenAmount = balance_map.balance.toNumber();
-            setUserITokenBalance(userITokenAmount)
-        
-            console.log("userITokenAmount: ", userITokenAmount)
-            const balance_map2 = await oTokenContractStorage.balances.get(userAddress);
+            setUserITokenBalance(userITokenAmount);
+    
+            const balance_map2 = await oTokenContractStorage.balances.get(
+                userAddress
+            );
             const userOTokenAmount = balance_map2.balance.toNumber();
-            setUserOTokenBalance(userOTokenAmount)
-            console.log("userOTokenAmount: ", userOTokenAmount)
+            setUserOTokenBalance(userOTokenAmount);
+        } catch (e) {
+            console.log(e)
+        }
+        
     };
 
     const connectWallet = async () => {

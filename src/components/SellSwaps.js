@@ -15,6 +15,10 @@ const SellSwaps = ({ poolAddress }) => {
         poolContract,
         oTokenContract,
         setOTokenStorage,
+        setUserITokenBalance,
+        setUserOTokenBalance,
+        iTokenStorage,
+        oTokenStorage,
     } = useContext(TezosStuffContext);
 
     const [paymentTokenAmount, setPaymentTokenAmount] = useState("");
@@ -66,6 +70,22 @@ const SellSwaps = ({ poolAddress }) => {
             const newOTokenStorage = await oTokenContract.storage();
             if (newOTokenStorage) setOTokenStorage(newOTokenStorage);
 
+            try {
+                const balance_map = await iTokenStorage.balances.get(
+                    userAddress
+                );
+                const userITokenAmount = balance_map.balance.toNumber();
+                setUserITokenBalance(userITokenAmount);
+
+                const balance_map2 = await oTokenStorage.balances.get(
+                    userAddress
+                );
+                const userOTokenAmount = balance_map2.balance.toNumber();
+                setUserOTokenBalance(userOTokenAmount);
+            } catch (e) {
+                console.log(e);
+            }
+
             setUserBalance(await Tezos.tz.getBalance(userAddress));
         } catch (error) {
             console.log(error);
@@ -101,14 +121,12 @@ const SellSwaps = ({ poolAddress }) => {
                 onClick={handleSubmit}
             >
                 {loading ? (
-                    <span style={{fontWeight: 'bold'}} >
+                    <span style={{ fontWeight: "bold" }}>
                         <i className="fas fa-spinner fa-spin"></i>&nbsp; Please
                         wait
                     </span>
                 ) : (
-                    <span style={{fontWeight: 'bold'}} >
-                        Trade
-                    </span>
+                    <span style={{ fontWeight: "bold" }}>Trade</span>
                 )}
             </button>
         </form>

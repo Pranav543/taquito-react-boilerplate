@@ -20,6 +20,8 @@ const TraderDashboard = () => {
         setITokenStorage,
         userITokenBalance,
         userOTokenBalance,
+        setUserITokenBalance,
+        setUserOTokenBalance,
     } = useContext(TezosStuffContext);
 
     const [isDefault, setDefault] = useState(true);
@@ -64,6 +66,22 @@ const TraderDashboard = () => {
             if (newOTokenStorage) setOTokenStorage(newOTokenStorage);
             const newITokenStorage = await iTokenContract.storage();
             if (newITokenStorage) setITokenStorage(newITokenStorage);
+
+            try {
+                const balance_map = await iTokenStorage.balances.get(
+                    userAddress
+                );
+                const userITokenAmount = balance_map.balance.toNumber();
+                setUserITokenBalance(userITokenAmount);
+
+                const balance_map2 = await oTokenStorage.balances.get(
+                    userAddress
+                );
+                const userOTokenAmount = balance_map2.balance.toNumber();
+                setUserOTokenBalance(userOTokenAmount);
+            } catch (e) {
+                console.log(e);
+            }
 
             setUserBalance(await Tezos.tz.getBalance(userAddress));
         } catch (error) {

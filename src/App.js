@@ -27,16 +27,16 @@ const App = () => {
     const [beaconConnection, setBeaconConnection] = useState(false);
     const [publicToken, setPublicToken] = useState("");
 
-    const iTokenAddress = "KT1GH5tnMqtyQgAn1eMK4Mh1H6EcwgZS6tXi";
-    const oTokenAddress = "KT1KkEF9jzsaQfNoDyRtJxRvhpVC1QLhRXPQ";
-    const kUSDAddress = "KT1ACn9ksAgs3sP4rnwCeMN2trDPYFxKq4gg";
-    const poolAddress = "KT1DUiy8DckvTngcftUsySXn6X5ipYns5Jsh";
+    // const iTokenAddress = "KT1GH5tnMqtyQgAn1eMK4Mh1H6EcwgZS6tXi";
+    // const oTokenAddress = "KT1KkEF9jzsaQfNoDyRtJxRvhpVC1QLhRXPQ";
+    // const kUSDAddress = "KT1ACn9ksAgs3sP4rnwCeMN2trDPYFxKq4gg";
+    // const poolAddress = "KT1DUiy8DckvTngcftUsySXn6X5ipYns5Jsh";
     const contractAddress = "KT1K3XVNzsmur7VRgY8CAHPUENaErzzEpe4e";
 
-    // const iTokenAddress = "KT1AfnV1XJJ1VnSdxaAMiHXGV6vQduKoYMBt";
-    // const oTokenAddress = "KT1UXwQAFeGNt6vo6i8x5eoLqG6dtpVq5qYr";
-    // const kUSDAddress = "KT1ACn9ksAgs3sP4rnwCeMN2trDPYFxKq4gg";
-    // const poolAddress = "KT1DQRvcdq7sF4cDVkiAcGfXCN2L25c6DfuV";
+    const iTokenAddress = "KT1MPDKCqk172AqpJWtNd7tLXnKVFrVWuZdB"; // Cover Token
+    const oTokenAddress = "KT1WpFueM8F1pDMUdRGgdpQeaxHavA8wsb3V"; // Premium Token
+    const kUSDAddress = "KT1ACn9ksAgs3sP4rnwCeMN2trDPYFxKq4gg"; // Payment Token
+    const poolAddress = "KT19aV83XWaSUTxQRk8oxkHU5BZpsUnDubvA";
 
     return (
         <div className="app">
