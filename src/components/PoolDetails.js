@@ -15,8 +15,8 @@ const PoolDetails = () => {
     let rows = [
         {
             id: 1,
-            Expiry: "10 Sept 21",
-            Default: "No",
+            Expiry: "15 Sept 21",
+            Default: "Yes",
             CoverPoolSize: iTokenPoolSize,
             PremiumPoolSize: oTokenPoolSize,
         },

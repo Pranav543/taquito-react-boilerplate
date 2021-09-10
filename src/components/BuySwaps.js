@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { OpKind } from "@taquito/taquito";
 import { TezosStuffContext } from "../App";
+import { useSnackbar } from "notistack";
 
 import "../App.scss";
 
@@ -20,6 +21,8 @@ const BuySwaps = ({ poolAddress }) => {
         iTokenStorage,
         oTokenStorage,
     } = useContext(TezosStuffContext);
+
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
     const [paymentTokenAmount, setPaymentTokenAmount] = useState("");
 
@@ -78,8 +81,24 @@ const BuySwaps = ({ poolAddress }) => {
                 console.log(e);
             }
             setUserBalance(await Tezos.tz.getBalance(userAddress));
+            enqueueSnackbar("Transaction Successful", {
+                variant: "success",
+                autoHideDuration: 4000,
+                anchorOrigin: {
+                    vertical: "top",
+                    horizontal: "left",
+                },
+            });
         } catch (error) {
             console.log(error);
+            enqueueSnackbar(`${error.message}`, {
+                variant: "error",
+                autoHideDuration: 4000,
+                anchorOrigin: {
+                    vertical: "top",
+                    horizontal: "left",
+                },
+            });
         } finally {
             setLoading(false);
         }
@@ -105,7 +124,6 @@ const BuySwaps = ({ poolAddress }) => {
             <h2 className="extraInfo">
                 You Will Receive : {paymentTokenAmount} IToken
             </h2>
-            <h2 className="extraInfo">Est. Cover If Default : 650 kUST</h2>
 
             <button
                 className="button"

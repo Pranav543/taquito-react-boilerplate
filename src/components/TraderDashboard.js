@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import Table from "./Table";
 import { OpKind } from "@taquito/taquito";
 import { TezosStuffContext } from "../App";
+import { useSnackbar } from "notistack";
 
 const TraderDashboard = () => {
     const {
@@ -22,18 +23,20 @@ const TraderDashboard = () => {
         userOTokenBalance,
         setUserITokenBalance,
         setUserOTokenBalance,
+        poolStorage,
     } = useContext(TezosStuffContext);
 
     const [isDefault, setDefault] = useState(true);
     const [loading, setLoading] = useState(false);
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
     const rows = [
         {
             id: 1,
             pool: "AAVE Protocol",
             Default: isDefault ? "Yes" : "No",
-            IToken: userITokenBalance,
-            OToken: userOTokenBalance,
+            CoverToken: userITokenBalance,
+            PremiumToken: userOTokenBalance,
         },
     ];
 
@@ -83,9 +86,26 @@ const TraderDashboard = () => {
                 console.log(e);
             }
 
+            enqueueSnackbar("Transaction Successful", {
+                variant: "success",
+                autoHideDuration: 4000,
+                anchorOrigin: {
+                    vertical: "top",
+                    horizontal: "left",
+                },
+            });
+
             setUserBalance(await Tezos.tz.getBalance(userAddress));
         } catch (error) {
             console.log(error);
+            enqueueSnackbar(`${error.message}`, {
+                variant: "error",
+                autoHideDuration: 4000,
+                anchorOrigin: {
+                    vertical: "top",
+                    horizontal: "left",
+                },
+            });
         } finally {
             setLoading(false);
         }
@@ -137,7 +157,46 @@ const TraderDashboard = () => {
         }
     };
 
-    const headers = ["id", "pool", "Default", "IToken", "OToken"];
+    const onDefault = () => {
+        if (typeof poolStorage.coveragePool === "object") {
+            let iTokenPoolSize = poolStorage.coveragePool.toNumber();
+            let iTokenTotalSupply = iTokenStorage.totalSupply.toNumber();
+            let temp = (iTokenPoolSize * 100) / iTokenTotalSupply;
+            let coverTokenValue = (temp * userITokenBalance) / 100;
+            enqueueSnackbar(
+                `In event of Default you get ${coverTokenValue} kUSD`,
+                {
+                    variant: "info",
+                    autoHideDuration: 4000,
+                    anchorOrigin: {
+                        vertical: "top",
+                        horizontal: "left",
+                    },
+                }
+            );
+        }
+    };
+    const onExpiry = () => {
+        if (typeof poolStorage.coveragePool === "object") {
+            let oTokenPoolSize = poolStorage.premiumPool.toNumber();
+            let oTokenTotalSupply = oTokenStorage.totalSupply.toNumber();
+            let temp = (oTokenPoolSize * 100) / oTokenTotalSupply;
+            let premiumTokenValue = (temp * userOTokenBalance) / 100;
+            enqueueSnackbar(
+                `In event of Expiry you get ${premiumTokenValue} kUSD`,
+                {
+                    variant: "info",
+                    autoHideDuration: 4000,
+                    anchorOrigin: {
+                        vertical: "top",
+                        horizontal: "left",
+                    },
+                }
+            );
+        }
+    };
+
+    const headers = ["id", "pool", "Default", "CoverToken", "PremiumToken"];
 
     return (
         <div className="leftComponent traders">
@@ -150,6 +209,25 @@ const TraderDashboard = () => {
                 headerLength={headers.length}
                 loading={loading}
             />
+            <div style={{ display: 'flex', flexDirection: 'row', marginTop: '10px' }}>
+                <h2 className="sectionTitle" style={{ marginLeft: "0", marginRight: "8px", alignSelf: 'center' }}> Predict 🤑 In: </h2>
+                <div>
+                    <button
+                        className="button"
+                        style={{ marginLeft: "0", marginRight: "8px" }}
+                        onClick={onDefault}
+                    >
+                        <span>Default Event</span>
+                    </button>
+                    <button
+                        className="button"
+                        style={{ marginLeft: "0" }}
+                        onClick={onExpiry}
+                    >
+                        <span>Expiry Event</span>
+                    </button>
+                </div>
+            </div>
         </div>
     );
 };

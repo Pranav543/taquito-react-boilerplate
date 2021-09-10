@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TezosToolkit } from "@taquito/taquito";
 import Navigation from "./pages/Navigation";
 import Main from "./pages/Main";
+import { SnackbarProvider } from 'notistack';
 
 import "./App.scss";
 
@@ -33,12 +34,13 @@ const App = () => {
     // const poolAddress = "KT1DUiy8DckvTngcftUsySXn6X5ipYns5Jsh";
     const contractAddress = "KT1K3XVNzsmur7VRgY8CAHPUENaErzzEpe4e";
 
-    const iTokenAddress = "KT1MPDKCqk172AqpJWtNd7tLXnKVFrVWuZdB"; // Cover Token
-    const oTokenAddress = "KT1WpFueM8F1pDMUdRGgdpQeaxHavA8wsb3V"; // Premium Token
+    const iTokenAddress = "KT1XX4Uv5S5xHJheXZ6MzJWKmGJcbXVhUNbk"; // Cover Token
+    const oTokenAddress = "KT1KZPbj6t24EMsEH3tAPL8Xq3fxjCndBqDZ"; // Premium Token
     const kUSDAddress = "KT1ACn9ksAgs3sP4rnwCeMN2trDPYFxKq4gg"; // Payment Token
-    const poolAddress = "KT19aV83XWaSUTxQRk8oxkHU5BZpsUnDubvA";
+    const poolAddress = "KT1GTeYxAEngWAEhnPwAdhguXZNiM8HiANWj";
 
     return (
+        <SnackbarProvider maxSnack={1}>
         <div className="app">
             <TezosStuffContext.Provider
                 value={{
@@ -86,6 +88,7 @@ const App = () => {
                 <Main poolAddress={poolAddress} />
             </TezosStuffContext.Provider>
         </div>
+        </SnackbarProvider>
     );
 };
 

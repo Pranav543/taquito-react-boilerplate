@@ -7,6 +7,7 @@ import {
 } from "@airgap/beacon-sdk";
 
 import { TezosStuffContext } from "./../App";
+import { useSnackbar } from "notistack";
 
 const ConnectButton = ({
     poolAddress,
@@ -34,6 +35,8 @@ const ConnectButton = ({
         setUserITokenBalance,
         setUserOTokenBalance,
     } = useContext(TezosStuffContext);
+
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
     const setup = async (userAddress) => {
         setUserAddress(userAddress);
@@ -70,22 +73,32 @@ const ConnectButton = ({
         console.log("poolContractStorage: ", poolContractStorage);
         console.log("iTokenContract: ", iTokenContract);
         console.log("iTokenContractStorage: ", iTokenContractStorage);
-        try{
+        try {
             const balance_map = await iTokenContractStorage.balances.get(
                 userAddress
             );
             const userITokenAmount = balance_map.balance.toNumber();
             setUserITokenBalance(userITokenAmount);
-    
+
             const balance_map2 = await oTokenContractStorage.balances.get(
                 userAddress
             );
             const userOTokenAmount = balance_map2.balance.toNumber();
             setUserOTokenBalance(userOTokenAmount);
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
-        
+        enqueueSnackbar(
+            "To Test This Dapp you will need test kUSD please mint it from KT1ACn9ksAgs3sP4rnwCeMN2trDPYFxKq4gg",
+            {
+                variant: "warning",
+                autoHideDuration: 8000,
+                anchorOrigin: {
+                    vertical: "top",
+                    horizontal: "left",
+                },
+            }
+        );
     };
 
     const connectWallet = async () => {

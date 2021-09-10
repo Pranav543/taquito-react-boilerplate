@@ -153,6 +153,13 @@ textarea:focus, input:focus{
   font-size: 20px;
 }
 
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 0px 0px 0px 0px;
+}
+
 
 
 .button {

@@ -4,7 +4,7 @@ import ConnectButton from "./../components/ConnectButton";
 import DisconnectButton from "./../components/DisconnectWallet";
 import { TezosStuffContext } from "../App";
 
-import SuperExchange_Logo from "../assets/SuperExchange_Logo_Circle.gif";
+import OmniSwapLogo from "../assets/omni-swap2.png"
 import "../App.scss";
 
 const Navigation = ({
@@ -17,7 +17,7 @@ const Navigation = ({
     const { userAddress } = useContext(TezosStuffContext);
     return (
         <div className="header">
-            <img className="logo" alt="Logo" src={SuperExchange_Logo}></img>
+            <img className="logo" alt="Logo" src={OmniSwapLogo}></img>
             <h1 className="appName">
                 <NavLink exact activeClassName="currentPage" to="/">
                     Omni-Swap
